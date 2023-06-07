@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import EmployeeService from '../services/EmpService';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 class CreateEmployeeComponent extends Component {
     constructor(props) {
@@ -20,15 +20,23 @@ class CreateEmployeeComponent extends Component {
         this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
         this.saveEmployee = this.saveEmployee.bind(this);
     }
+    
+
     saveEmployee = (e) => {
         e.preventDefault();
         let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId,department :this.state.department,salary:this.state.salary,gender:this.state.gender,dob:this.state.dob};
         console.log('employee => ' + JSON.stringify(employee));
-
-        EmployeeService.createEmployee(employee).then(res =>{
-            <Link to='/employees'>this.props.history.push('/employees');</Link>
-        });
+        const conf= window.confirm("Do you want to save ?");
+        if(conf){
+            EmployeeService.createEmployee(employee)
+            .then(res =>{
+                <Link to='/employees'> this.props.history.push('/employees');</Link>
+                window.location.replace("/employees");
+            });
+        }
     }
+
+
     changeFirstNameHandler= (event) => {
         this.setState({firstName: event.target.value});
 
@@ -96,20 +104,22 @@ class CreateEmployeeComponent extends Component {
                                     </div>
                                     <div className = "form-group">
                                         <label style={{fontFamily:'-moz-initial',color:'teal',fontSize:25}}> Gender: </label>
-                                        <select placeholder="Enter M or F" name="gender" className="form-control" 
-                                            value={this.state.gender} onChange={this.changeGenderHandler}>
-                                                <option>Male</option>
-                                                <option>Female</option>
-                                        </select>
+                                        <input type="radio" id="html" name="fav_language" value="Male"/>
+                                        <label for="html">None</label>
+                                        <input type="radio" id="html" name="fav_language" value="Male"/>
+                                        <label for="html">Male</label>
+                                        <input type="radio" id="html" name="fav_language" value="Female"/>
+                                        <label for="html">Female</label><br></br>
+                                     
                                     </div>
                                     <div className = "form-group">
                                         <label style={{fontFamily:'-moz-initial',color:'teal',fontSize:25}}> DateofBirth: </label>
                                         <input placeholder="dob" name="dob" className="form-control"  type='date'
-                                            value={this.state.dob} onChange={this.changeDobHandler}/>
+                                            value={this.state.dob} onChange={this.changeDobHandler} required/>
                                     </div>
                                     <div className = "form-group">
-                                    <Link to='/employees'><button className="btn btn-success" onClick={this.saveEmployee} >Save</button></Link>
-                                    <Link to='/employees'> <button className="btn btn-info"  style={{marginLeft: "10px"}}>Ok</button></Link>
+                                    <Link to='/employees'><button type="submit" className="btn btn-success" onClick={this.saveEmployee} >Save</button></Link>
+                                    <Link to='/employees'> <button className="btn btn-info"  style={{marginLeft: "10px"}}>Cancel</button></Link>
                                     </div>                            
                                 </form>
                             </div>
@@ -120,8 +130,12 @@ class CreateEmployeeComponent extends Component {
         </div>
     )
 }
-        
-    }
+
+
+
+
+}
+
 
 
 export default CreateEmployeeComponent

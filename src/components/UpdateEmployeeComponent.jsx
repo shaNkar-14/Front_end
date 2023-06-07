@@ -47,11 +47,13 @@ class UpdateEmployeeComponent extends Component {
         e.preventDefault();
         let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId,department :this.state.department,salary:this.state.salary,gender:this.state.gender,dob:this.state.dob};
         console.log('employee => ' + JSON.stringify(employee));
-
-        EmployeeService.updateEmployee(employee,this.state.id).then(res =>{
+        const conf= window.confirm("Do you want to update ?");
+        if(conf){ EmployeeService.updateEmployee(employee,this.state.id)
+            .then(res =>{
             <Link to='/employees'> this.props.history.push('/employees');</Link>
-        });
-        
+                window.location.replace("/employees");
+            });
+            }
     }
     changeFirstNameHandler= (event) => {
         this.setState({firstName: event.target.value});
@@ -120,6 +122,7 @@ class UpdateEmployeeComponent extends Component {
                                         <label style={{fontFamily:'-moz-initial',color:'gold'}}> Gender: </label>
                                         <select placeholder="Enter M or F" name="gender" className="form-control" 
                                             value={this.state.gender} onChange={this.changeGenderHandler}>
+                                                <option>None</option>
                                                 <option>Male</option>
                                                 <option>Female</option>
                                         </select>
@@ -130,9 +133,9 @@ class UpdateEmployeeComponent extends Component {
                                             value={this.state.dob} onChange={this.changeDobHandler}/>
                                     </div>
                                     <div className = "form-group">
-
+                                    
                                     <Link to='/employees'><button className="btn btn-success"  onClick={this.updateEmployee}>Save</button></Link>
-                                    <Link to='/employees'> <button className="btn btn-info"  style={{marginLeft: "10px"}}>OK</button></Link>
+                                    <Link to='/employees'> <button className="btn btn-info"  style={{marginLeft: "10px"}}>Cancel</button></Link>
                                     </div>
                                 </form>
                             </div>

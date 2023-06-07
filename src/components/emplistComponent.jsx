@@ -86,9 +86,9 @@ class ListEmployeeComponent extends Component {
                                     <th> Employee Salary</th>
                                     <th> Employee Gender</th>
                                     <th> Employee DateOfBirth</th>
-                                    <th> Action1</th>
-                                    <th> Action2</th>
-                                    <th> Action3</th>
+                                    
+                                    <th style={{width:"270px",textAlign:"center"}}> Actions</th>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
@@ -103,10 +103,11 @@ class ListEmployeeComponent extends Component {
                                              <td> {employee.salary}</td>
                                              <td> {employee.gender}</td>
                                              <td> {employee.dob}</td>
-                                             <td><Link to={`/update-employee/${employee.id}`}><button  onClick={ () => this.editEmployee(employee.id)} className="btn btn-success" >Edit </button></Link></td>
-                                             <td><Link to={'/employees'}>  <button style={{marginLeft: "50px"}} onClick={ () => this.deleteEmployee(employee.id)} className="btn btn-danger">Delete </button></Link></td>
-                                             <td><Link to={`/view-employee/${employee.id}`}>   <button style={{marginLeft: "50px"}} onClick={ () => this.viewEmployee(employee.id)} className="btn btn-info">View </button></Link></td>
-                                             
+                                             <td>
+                                          <Link to={`/update-employee/${employee.id}`}><button style={{marginLeft:"20px"}} onClick={ () => this.editEmployee(employee.id)} className="btn btn-success" >Edit</button></Link>
+                                           <Link to={'/employees'}><button style={{marginLeft:"20px"}} onClick={ () => this.deleteEmployee(employee.id)} className="btn btn-danger">Delete </button></Link>
+                                            <Link to={`/view-employee/${employee.id}`}><button style={{marginLeft:"20px"}}onClick={ () => this.viewEmployee(employee.id)} className="btn btn-info">View</button></Link>
+                                            </td>
                                         </tr>
                                     )
                                 }

@@ -53,38 +53,22 @@ const Home = () => {
         >
           <div className="Auth-form-content">
             <h1>SignIn !</h1>
-
+            <div>
             <form className="containe" onSubmit={handlesubmit}>
-              <div className="Auth-form-content">
-                <label className="label">Email :- </label>
-
-                <input type="text" required onChange={emailChange}></input>
-              </div>
-
-              <div className="Auth-form-content">
-                <label className="label" required>
-                  Password
-                </label>
-
-                <input
-                  type="password"
-                  required
-                  onChange={passwordChange}
-                ></input>
-              </div>
-              <br></br>
-
-              <div>
+              <label className="label" style={{textAlign:"left",float:"left"}}>Email :</label>
+                <input type="text"onChange={emailChange} style={{alignContent:"center"}} ></input><br></br>
+                <label className="label" required style={{textAlign:"left"}}>Password :</label>
+                <input type="password" required onChange={passwordChange} style={{marginLeft: "10px"}}></input>
+            </form>
+            </div>
+            <br></br>
+            <div>
                 <button type="submit" className="btn btn-primary">
                   Login
                 </button>
               </div>
-            </form>
-            <br></br>
-
-            <button className="btn btn-outline-primary" onClick={registerPage}>
-              Create Account
-            </button>
+              <br></br>
+            <button className="btn btn-outline-primary" onClick={registerPage}>Create Account</button>
           </div>
         </div>
       </div>
