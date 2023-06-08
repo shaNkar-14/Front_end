@@ -67,21 +67,21 @@ class ListEmployeeComponent extends Component {
     render() {
         return (
             
-            <div style={{backgroundImage:`url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTNa0xtQZDXjzU90-6xcgAP0ca8BeasKR7lpFnQ-u1-Q&usqp=CAU&ec=48665698')`, height: '900px'}}>
+            <div>
                 <div className='container'>
                     <h2 className="text-center">Employees List</h2>
                     <div className = "row">
-                        <Link to='/add-employee'><button className='btn btn-primary'>Add Employee</button></Link>                    
+                        <Link to='/add-employee'><button className='btn btn-primary' style={{float:"right",color:"ButtonShadow"}}>Add Employee</button></Link>                    
                     </div>
                     <br></br>
                     <div className = "row">
                         <table className = "table table-striped table-bordered">
 
-                            <thead class='thead-dark'>
+                            <thead style={{}}>
                                 <tr>
-                                    <th> Employee First Name</th>
-                                    <th> Employee Last Name</th>
-                                    <th> Employee Email Id</th>
+                                    <th style={{textAlign:"initial"}}> Employee Firstname</th>
+                                    <th> Employee Lastname</th>
+                                    <th> Employee EmailId</th>
                                     <th> Employee Department</th>
                                     <th> Employee Salary</th>
                                     <th> Employee Gender</th>

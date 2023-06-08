@@ -38,50 +38,34 @@ const Register = () => {
   };
 
   return (
-    <div
-      style={{
-        backgroundImage: `url('https://static2.bigstockphoto.com/7/7/2/large1500/277401307.jpg')`,
-        height: "700px",
-      }}
-    >
+    <div>
       <div className="Auth-form-container">
         <div
           className="Auth-form"
-          style={{ backgroundColor: "black", color: "white" }}
-        >
+          style={{ backgroundColor: "black", color: "white" }}>
           <div className="Auth-form-content">
-            <h1>SignUp !</h1>
+            <h1>User Register</h1> <br/>
 
-            <form className="container" onSubmit={handlesubmit}>
-              <div className="Auth-form-content">
-                <label className="label">Name :-</label>
-
-                <input type="text" required onChange={nameChange}></input>
+            <form  onSubmit={handlesubmit}>
+              <div>
+                <label className="label" style={{float:"left"}}>Name :</label>
+                <input type="text" required onChange={nameChange} style={{marginLeft: "30px"}}></input>
               </div>
+              <br/>
+              <div >
+                <label className="label" style={{float:"left"}}>Email :</label>
 
-              <div className="Auth-form-content">
-                <label className="label">Email :-</label>
-
-                <input type="text" required onChange={emailChange}></input>
+                <input type="text" required onChange={emailChange} style={{marginLeft: "35px"}}></input>
               </div>
-
-              <div className="Auth-form-content">
-                <label className="label" required>
-                  Password
-                </label>
-
-                <input
-                  type="password"
-                  required
-                  onChange={passwordChange}
-                ></input>
+              <br/>
+              <div >
+                <label className="label" style={{float:"left"}}> Password : </label>
+                <input type="password" required onChange={passwordChange} style={{marginLeft: "7px"}}></input>
               </div>
-              <br></br>
+              <br/>
 
               <div className="login-div-con">
-                <button type="submit" className="btn btn-primary">
-                  Register
-                </button>
+                <button type="submit" className="btn btn-primary"> Register </button>
               </div>
               <br></br>
 
