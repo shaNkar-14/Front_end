@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 // import axios from 'axios';
 
 
-class ListEmployeeComponent extends Component {
+class EmployeeList extends Component {
     constructor(props) {
         super(props)
 
@@ -79,15 +79,15 @@ class ListEmployeeComponent extends Component {
 
                             <thead style={{}}>
                                 <tr>
-                                    <th style={{textAlign:"initial"}}> Employee Firstname</th>
-                                    <th> Employee Lastname</th>
-                                    <th> Employee EmailId</th>
-                                    <th> Employee Department</th>
-                                    <th> Employee Salary</th>
-                                    <th> Employee Gender</th>
-                                    <th> Employee DateOfBirth</th>
+                                    <th style={{textAlign:"center",fontFamily:"FrankRuehl"}}> Firstname</th>
+                                    <th style={{textAlign:"center",fontFamily:"FrankRuehl"}}> Lastname</th>
+                                    <th style={{textAlign:"center",fontFamily:"FrankRuehl"}}> Email Id</th>
+                                    <th style={{textAlign:"center",fontFamily:"FrankRuehl"}}> Department</th>
+                                    <th style={{textAlign:"center",fontFamily:"FrankRuehl"}}> Salary</th>
+                                    <th style={{textAlign:"center",fontFamily:"FrankRuehl"}}> Gender</th>
+                                    <th style={{textAlign:"center",fontFamily:"FrankRuehl"}}> DateOfBirth</th>
                                     
-                                    <th style={{width:"270px",textAlign:"center"}}> Actions</th>
+                                    <th style={{width:"200px",textAlign:"center",fontFamily:"FrankRuehl"}}> Actions</th>
                                    
                                 </tr>
                             </thead>
@@ -106,7 +106,7 @@ class ListEmployeeComponent extends Component {
                                              <td>
                                           <Link to={`/update-employee/${employee.id}`}><button style={{marginLeft:"20px"}} onClick={ () => this.editEmployee(employee.id)} className="btn btn-success" >Edit</button></Link>
                                            <Link to={'/employees'}><button style={{marginLeft:"20px"}} onClick={ () => this.deleteEmployee(employee.id)} className="btn btn-danger">Delete </button></Link>
-                                            <Link to={`/view-employee/${employee.id}`}><button style={{marginLeft:"20px"}}onClick={ () => this.viewEmployee(employee.id)} className="btn btn-info">View</button></Link>
+                                            {/* <Link to={`/view-employee/${employee.id}`}><button style={{marginLeft:"20px"}}onClick={ () => this.viewEmployee(employee.id)} className="btn btn-info">View</button></Link> */}
                                             </td>
                                         </tr>
                                     )
@@ -120,4 +120,4 @@ class ListEmployeeComponent extends Component {
     }
 }
 
-export default ListEmployeeComponent
+export default EmployeeList

@@ -53,6 +53,7 @@ const Home = () => {
             </form>
 
             <br></br>
+            <label className="label">Don't Have an Account ? </label>
             <button className="btn btn-outline-primary" onClick={registerPage}>
               Create Account
             </button>

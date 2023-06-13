@@ -1,11 +1,11 @@
 import "./App.css";
 import HeaderComponent from "./components/HeaderComponent";
-import ListEmployeeComponent from "./components/emplistComponent";
+import EmployeeList from "./components/EmployeeList";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import React from "react";
-import CreateEmployeeComponent from "./components/CreateEmployeeComponent";
-import UpdateEmployeeComponent from "./components/UpdateEmployeeComponent";
-import ViewEmployeeComponent from "./components/ViewEmployeeComponent";
+import AddEmployee from "./components/AddEmployee";
+import EditEmployee from "./components/EditEmployee";
+// import ViewEmployeeComponent from "./components/ViewEmployeeComponent";
 import Home from "./components/loginpage";
 import Register from "./components/Registerpage";
 import { Routes } from "react-router-dom";
@@ -18,10 +18,10 @@ function App() {
           <Routes>
             <Route path="/" element={< Home/>} />
             <Route path="/register" element={< Register/>} />
-            <Route path="/employees" element={<ListEmployeeComponent />}></Route>
-            <Route path="/add-employee" element={<CreateEmployeeComponent />} />
-            <Route path ="/update-employee/:id" element={<UpdateEmployeeComponent/>}></Route>
-            <Route path ="/view-employee/:id"  element= {<ViewEmployeeComponent/>}></Route>
+            <Route path="/employees" element={<EmployeeList />}></Route>
+            <Route path="/add-employee" element={<AddEmployee />} />
+            <Route path ="/update-employee/:id" element={<EditEmployee/>}></Route>
+            {/* <Route path ="/view-employee/:id"  element= {<ViewEmployeeComponent/>}></Route> */}
             
           </Routes>
         </div>

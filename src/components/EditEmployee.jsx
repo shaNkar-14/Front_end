@@ -10,7 +10,7 @@ export function withRouter(Children){
     }
 }
 
-class UpdateEmployeeComponent extends Component {
+class EditEmployee extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -84,7 +84,7 @@ class UpdateEmployeeComponent extends Component {
         this.props.history.push('/employees');
     }
     render(){
-        return( <div style={{backgroundImage:`url('https://www.freepsd360.com/wp-content/uploads/2022/11/Stage-Light-Background-HD-Free-Download-4.jpg')`, height: '900px'}}>
+        return( <div>
             <br></br>
                <div className = "container">
                     <div className = "row">
@@ -93,33 +93,33 @@ class UpdateEmployeeComponent extends Component {
                             <div className = "card-body">
                                 <form>
                                     <div className = "form-group">
-                                          <h3 className="text-center" style={{fontFamily:'cursive',color:'gold'}} >Update employee</h3>
-                                        <label style={{fontFamily:'-moz-initial',color:'gold'}}> First Name: </label>
+                                          <h3 className="text-center" style={{fontFamily:'Georgia',fontSize:50}} >Edit Employee Details</h3>
+                                        <label style={{fontFamily:'-moz-initial'}}> First Name: </label>
                                         <input placeholder="First Name" name="firstName" className="form-control" 
                                             value={this.state.firstName} onChange={this.changeFirstNameHandler}/>
                                     </div>
                                     <div className = "form-group">
-                                        <label style={{fontFamily:'-moz-initial',color:'gold'}}> Last Name: </label>
+                                        <label style={{fontFamily:'-moz-initial'}}> Last Name: </label>
                                         <input placeholder="Last Name" name="lastName" className="form-control" 
                                             value={this.state.lastName} onChange={this.changeLastNameHandler}/>
                                     </div>
                                     <div className = "form-group">
-                                        <label style={{fontFamily:'-moz-initial',color:'gold'}}> Email Id: </label>
+                                        <label style={{fontFamily:'-moz-initial'}}> Email Id: </label>
                                         <input placeholder="Email Address" name="emailId" className="form-control" 
                                             value={this.state.emailId} onChange={this.changeEmailHandler}/>
                                     </div>
                                     <div className = "form-group">
-                                        <label style={{fontFamily:'-moz-initial',color:'gold'}}> Department: </label>
+                                        <label style={{fontFamily:'-moz-initial'}}> Department: </label>
                                         <input placeholder="Department" name="department" className="form-control" 
                                             value={this.state.department} onChange={this.changeDepartmentHandler}/>
                                     </div>
                                     <div className = "form-group">
-                                        <label style={{fontFamily:'-moz-initial',color:'gold'}}> Salary: </label>
+                                        <label style={{fontFamily:'-moz-initial'}}> Salary: </label>
                                         <input placeholder="salary" name="salary" className="form-control" 
                                             value={this.state.salary} onChange={this.changeSalaryHandler}/>
                                     </div>
                                     <div className = "form-group">
-                                        <label style={{fontFamily:'-moz-initial',color:'gold'}}> Gender: </label>
+                                        <label style={{fontFamily:'-moz-initial'}}> Gender: </label>
                                         <select placeholder="Enter M or F" name="gender" className="form-control" 
                                             value={this.state.gender} onChange={this.changeGenderHandler}>
                                                 <option>None</option>
@@ -128,7 +128,7 @@ class UpdateEmployeeComponent extends Component {
                                         </select>
                                     </div>
                                     <div className = "form-group">
-                                        <label style={{fontFamily:'-moz-initial',color:'gold'}}> DateofBirth: </label>
+                                        <label style={{fontFamily:'-moz-initial'}}> DateofBirth: </label>
                                         <input placeholder="dob" name="dob" className="form-control"  type='date'
                                             value={this.state.dob} onChange={this.changeDobHandler}/>
                                     </div>
@@ -150,4 +150,4 @@ class UpdateEmployeeComponent extends Component {
     }
 
 
-export default withRouter(UpdateEmployeeComponent)
+export default withRouter(EditEmployee)

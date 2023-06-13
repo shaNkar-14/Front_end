@@ -70,7 +70,7 @@ const Register = () => {
               <br></br>
 
               <div className="log-div">
-                Have an account? <Link to={"/"}>login</Link>
+               Already Have an account?<Link to={"/"}>login</Link>
               </div>
             </form>
           </div>
