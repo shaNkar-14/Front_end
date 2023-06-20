@@ -142,8 +142,14 @@ class EditEmployee extends Component {
                                     </div>
                                     <div className = "form-group">
                                         <label style={{fontFamily:'-moz-initial'}}> Department: </label>
-                                        <input placeholder="Department" name="department" className="form-control" 
-                                            value={this.state.department} onChange={this.changeDepartmentHandler}/>
+                                        <select required name="department" className="form-control"
+                                            value={this.state.department} onChange={this.changeDepartmentHandler}>
+                                                <option>None</option>
+                                                <option>Accounts</option>
+                                                <option>Sales</option>
+                                                <option>Development</option>
+                                                <option>Testing</option>
+                                                </select>
                                     </div>
                                     <div className = "form-group">
                                         <label style={{fontFamily:'-moz-initial'}}> Salary: </label>
