@@ -9,6 +9,13 @@ export function withRouter(Children){
         return  <Children{...props} match={match}/>
     }
 }
+const emailState = {
+    emailId: '',
+    error: ''
+}
+const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+
 
 class EditEmployee extends Component {
     constructor(props) {
@@ -47,8 +54,33 @@ class EditEmployee extends Component {
         e.preventDefault();
         let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId,department :this.state.department,salary:this.state.salary,gender:this.state.gender,dob:this.state.dob};
         console.log('employee => ' + JSON.stringify(employee));
-        const conf= window.confirm("Do you want to update ?");
-        if(conf){ EmployeeService.updateEmployee(employee,this.state.id)
+        if (this.state.firstName.length === 0) {
+            alert("firstName field is Empty");
+          }
+         else if (this.state.lastName.length === 0) {
+            alert("lastName field is Empty");
+          }
+          else if(!this.state.emailId || regex.test(this.state.emailId) === false){
+            this.setState({
+                error: alert( "email format is incorrect"),
+                emailState
+            });
+            return false;
+        }
+          else if (this.state.department.length === 0) {
+            alert("Department field is Empty");
+          }
+          else if (this.state.salary.length === 0) {
+            alert("salary field is Empty");
+          }
+          else if (this.state.gender.length === 0) {
+            alert("gender field is Empty");
+          }
+          else if (this.state.dob.length === 0) {
+            alert("dob field is Empty");
+          }
+        else if(window.confirm("Do you want to save ?"))
+        { EmployeeService.updateEmployee(employee,this.state.id)
             .then(res =>{
             <Link to='/employees'> this.props.history.push('/employees');</Link>
                 window.location.replace("/employees");
@@ -118,14 +150,13 @@ class EditEmployee extends Component {
                                         <input placeholder="salary" name="salary" className="form-control" 
                                             value={this.state.salary} onChange={this.changeSalaryHandler}/>
                                     </div>
-                                    <div className = "form-group">
-                                        <label style={{fontFamily:'-moz-initial'}}> Gender: </label>
-                                        <select placeholder="Enter M or F" name="gender" className="form-control" 
-                                            value={this.state.gender} onChange={this.changeGenderHandler}>
-                                                <option>None</option>
-                                                <option>Male</option>
-                                                <option>Female</option>
-                                        </select>
+                                    <div style={{marginLeft:"70px"}}>
+                                        <label style={{fontFamily:'-moz-initial',fontSize:25}}> Gender: </label>
+                                        
+                                        <input required type="radio" value="Male" checked={this.state.gender === "Male"} onChange={this.changeGenderHandler} /> Male 
+
+                                        
+                                        <input required type="radio" value="Female" checked={this.state.gender === "Female"} onChange={this.changeGenderHandler} /> Female
                                     </div>
                                     <div className = "form-group">
                                         <label style={{fontFamily:'-moz-initial'}}> DateofBirth: </label>

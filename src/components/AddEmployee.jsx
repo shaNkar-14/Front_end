@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 
 import EmployeeService from '../services/EmpService';
 
-import { Link } from 'react-router-dom';
+import { Link,useParams } from 'react-router-dom';
+
+const emailState = {
+    emailId: '',
+    error: ''
+}
+const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 class AddEmployee extends Component {
     constructor(props) {
@@ -19,20 +25,57 @@ class AddEmployee extends Component {
         }
         this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
         this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
+        this.changeEmailHandler = this.changeEmailHandler.bind(this);
         this.saveEmployee = this.saveEmployee.bind(this);
     }
+    emailValidation(){
+        const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        if(!this.state.emailId || regex.test(this.state.emailId) === false){
+            this.setState({
+                error: alert( "Email is not valid")
+            });
+            return false;
+        }
+        return true;
+    }
+
     saveEmployee = (event) => {
         event.preventDefault();
         let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId,department :this.state.department,salary:this.state.salary,gender:this.state.gender,dob:this.state.dob};
         console.log('employee => ' + JSON.stringify(employee));
-        const conf= window.confirm("Do you want to save ?"+employee);
-        if(conf){
+    
+        if (this.state.firstName.length ===0) {
+            alert("firstName contain atleast  3 characters ");
+          }
+         else if (this.state.lastName.length === 0) {
+            alert("lastName field is Empty");
+          }
+         else if(!this.state.emailId || regex.test(this.state.emailId) === false){
+            this.setState({
+                error: alert( "email format is incorrect"),
+                emailState
+            });
+            return false;
+         }
+          else if (this.state.department.length === 0) {
+            alert("Department field is Empty")
+          }
+          else if (this.state.salary.length === 0) {
+            alert("salary field is Empty");
+          }
+          else if (this.state.gender.length === 0) {
+            alert("gender field is Empty");
+          }
+          else if (this.state.dob.length === 0) {
+            alert("dob field is Empty");
+          }
+        else if(window.confirm("Do you want to save ?")){
             EmployeeService.createEmployee(employee)
             .then(res =>{
                 <Link to='/employees'> this.props.history.push('/employees');</Link>
                 window.location.replace("/employees");
             });
-        }
+            }
     }
     changeFirstNameHandler= (event) => {
 
@@ -59,6 +102,7 @@ class AddEmployee extends Component {
     cancel(){
         this.props.history.push('/employees');
     }
+     
     render(){
 
         return(<div>
@@ -72,24 +116,24 @@ class AddEmployee extends Component {
                                 <form>
                                     <div className = "form-group" style={{alignItems:"-moz-initial"}}>
                                     <h3 className="text-center" style={{fontFamily:'Georgia',fontSize:50}} >Add Employee Details</h3>
-                                        <label style={{fontFamily:'-moz-initial',fontSize:25}} required> First Name: </label>
-                                        <input placeholder="First Name" name="firstName" className="form-control"
-                                            value={this.state.firstName}  required onChange={this.changeFirstNameHandler}/>
+                                        <label style={{fontFamily:'-moz-initial',fontSize:25}} > First Name: </label>
+                                        <input required placeholder="First Name" name="firstName" className="form-control"
+                                            value={this.state.firstName}   onChange={this.changeFirstNameHandler}/>
                                     </div>
                                     <div className = "form-group">
-                                        <label style={{fontFamily:'-moz-initial',fontSize:25}} required> Last Name: </label>
-                                        <input placeholder="Last Name" name="lastName" className="form-control"
-                                            value={this.state.lastName} required onChange={this.changeLastNameHandler}/>
+                                        <label style={{fontFamily:'-moz-initial',fontSize:25}} > Last Name: </label>
+                                        <input required placeholder="Last Name" name="lastName" className="form-control"
+                                            value={this.state.lastName}  onChange={this.changeLastNameHandler}/>
                                     </div>
                                     <div className = "form-group">
-                                        <label style={{fontFamily:'-moz-initial',fontSize:25}} required> Email Id: </label>
-                                        <input placeholder="Email Address" name="emailId" className="form-control"
+                                        <label style={{fontFamily:'-moz-initial',fontSize:25}} > Email Id: </label>
+                                        <input required placeholder="Email Address" name="emailId" className="form-control"
                                             value={this.state.emailId} onChange={this.changeEmailHandler}/>
                                     </div>
                                     <div className = "form-group">
-                                        <label style={{fontFamily:'-moz-initial',fontSize:25}} required> Department: </label>
-                                        <select  name="department" className="form-control"
-                                            value={this.state.department} required onChange={this.changeDepartmentHandler}>
+                                        <label style={{fontFamily:'-moz-initial',fontSize:25}} > Department: </label>
+                                        <select required name="department" className="form-control"
+                                            value={this.state.department} onChange={this.changeDepartmentHandler}>
                                                 <option>None</option>
                                                 <option>Accounts</option>
                                                 <option>Sales</option>
@@ -100,9 +144,9 @@ class AddEmployee extends Component {
                                             value={this.state.department} required onChange={this.changeDepartmentHandler}/> */}
                                     </div>
                                     <div className = "form-group">
-                                        <label style={{fontFamily:'-moz-initial',fontSize:25}} required> Salary: </label>
-                                        <input  type='number'placeholder="salary" name="salary" className="form-control"
-                                            value={this.state.salary} required onChange={this.changeSalaryHandler}/>
+                                        <label style={{fontFamily:'-moz-initial',fontSize:25}} > Salary: </label>
+                                        <input required type='number'placeholder="salary" name="salary" className="form-control"
+                                            value={this.state.salary} onChange={this.changeSalaryHandler}/>
                                     </div>
                                     {/* <div className = "form-group">
                                         <label style={{fontFamily:'Quire Sans',fontSize:25}} required> Gender: </label>
@@ -116,17 +160,15 @@ class AddEmployee extends Component {
                                         </select>
                                     </div> */}
                                     <div style={{marginLeft:"70px"}}>
-                                        <label style={{fontFamily:'Garamond',fontSize:25}}> Gender: </label>
-                                        <label style={{fontFamily:'Garamond',fontSize:25}}>
-                                        <input  type="radio" value="Male" checked={this.state.gender === "Male"} onChange={this.changeGenderHandler} /> Male </label>
-
-                                        <label style={{fontFamily:'Garamond',fontSize:25}}>
-                                        <input  type="radio" value="Female" checked={this.state.gender === "Female"} onChange={this.changeGenderHandler} /> Female </label>
+                                        <label style={{fontFamily:'Garamond',fontSize:25}}> Gender: 
+                                        <input required type="radio" value="Male" style={{marginLeft:"10px"}} checked={this.state.gender === "Male"} onChange={this.changeGenderHandler} /> Male 
+                                   
+                                        <input required type="radio" value="Female" style={{marginLeft:"10px"}} checked={this.state.gender === "Female"} onChange={this.changeGenderHandler} /> Female </label>
                                     </div>
                                     <div className = "form-group">
-                                        <label style={{fontFamily:'Garamond',fontSize:25}}> DateofBirth: </label>
-                                        <input placeholder="dob" name="dob" className="form-control"  type='date'
-                                           value={this.state.dob} required onChange={this.changeDobHandler}/>
+                                        <label style={{fontFamily:'Garamond',fontSize:25}}> DateofBirth:</label>
+                                        <input required placeholder="dob" name="dob" className="form-control"  type='date'
+                                           value={this.state.dob}  onChange={this.changeDobHandler}/>
                                     </div>
                                     <div className = "form-group">
                                     <Link to='/employees'><button className="btn btn-success" onClick={this.saveEmployee} >Save</button></Link>

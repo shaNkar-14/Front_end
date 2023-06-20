@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import EmployeeService from '../services/EmpService';
 import { Link } from 'react-router-dom';
-import Editlist from './Newedit';
 // import CreateEmployeeComponent from './CreateEmployeeComponent';
 // import axios from 'axios';
 
 
-class EmployeeList extends Component {
+class Editlist extends Component {
     constructor(props) {
         super(props)
 
@@ -69,11 +68,12 @@ class EmployeeList extends Component {
         return (
             
             <div>
-                <nav style={{backgroundColor:"black"}}> 
-                <Link to='/employees' style={{margin:"10px",fontFamily:"FrankRuehl",fontSize:"20px"}}>Home</Link> 
-                <Link to='/add-employee' style={{margin:"10px",fontFamily:"FrankRuehl",fontSize:"20px"}}>Add</Link> 
-                <Link to='/edit' style={{margin:"10px",fontFamily:"FrankRuehl",fontSize:"20px"}}> Edit</Link> 
-                <Link to='/'style={{margin:"10px",fontFamily:"FrankRuehl",fontSize:"20px"}}>Log Out</Link> 
+                <nav style={{backgroundColor:"black"}}>
+                <Link to='/employees' style={{fontFamily:"FrankRuehl",fontSize:"20px"}}>Back</Link>
+                {/* <Link to='/employees' style={{margin:"10px",fontFamily:"FrankRuehl",fontSize:"20px"}}>Home</Link>  */}
+                {/* <Link to='/add-employee' style={{margin:"10px",fontFamily:"FrankRuehl",fontSize:"20px"}}>Add</Link> */}
+                {/* <Link to='/'style={{margin:"10px",fontFamily:"FrankRuehl",fontSize:"20px"}}>Log out</Link>  */}
+             
             
                 </nav>
                 <div className='container'>
@@ -112,9 +112,7 @@ class EmployeeList extends Component {
                                              <td> {employee.gender}</td>
                                              <td> {employee.dob}</td>
                                              <td>
-                                          {/* <Link to={`/update-employee/${employee.id}`}><button style={{marginLeft:"20px"}} onClick={ () => this.editEmployee(employee.id)} className="btn btn-success" >Edit</button></Link> */}
-                                           <Link to={'/employees'}><button style={{marginLeft:"60px"}} onClick={ () => this.deleteEmployee(employee.id)} className="btn btn-danger">Delete </button></Link>
-                                            {/* <Link to={`/view-employee/${employee.id}`}><button style={{marginLeft:"20px"}}onClick={ () => this.viewEmployee(employee.id)} className="btn btn-info">View</button></Link> */}
+                                          <Link to={`/update-employee/${employee.id}`}><button style={{marginLeft:"60px"}} onClick={ () => this.editEmployee(employee.id)} className="btn btn-success" >Edit</button></Link>
                                             </td>
                                         </tr>
                                     )
@@ -128,4 +126,4 @@ class EmployeeList extends Component {
     }
 }
 
-export default EmployeeList
+export default Editlist

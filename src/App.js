@@ -9,6 +9,7 @@ import EditEmployee from "./components/EditEmployee";
 import Home from "./components/loginpage";
 import Register from "./components/Registerpage";
 import { Routes } from "react-router-dom";
+import Editlist from "./components/Newedit";
 function App() {
   return ( 
     <div>
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={< Home/>} />
             <Route path="/register" element={< Register/>} />
             <Route path="/employees" element={<EmployeeList />}></Route>
+            <Route path="/edit" element={<Editlist />}></Route>
             <Route path="/add-employee" element={<AddEmployee />} />
             <Route path ="/update-employee/:id" element={<EditEmployee/>}></Route>
             {/* <Route path ="/view-employee/:id"  element= {<ViewEmployeeComponent/>}></Route> */}
