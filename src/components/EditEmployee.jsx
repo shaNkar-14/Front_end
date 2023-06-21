@@ -29,7 +29,8 @@ class EditEmployee extends Component {
             department:'',
             salary:'',
             gender:'',
-            dob:''
+            dob:'',
+            image:''
         }
         this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
         this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
@@ -45,14 +46,15 @@ class EditEmployee extends Component {
              department:employee.department,
              salary:employee.salary,
              gender:employee.gender,
-             dob:employee.dob
+             dob:employee.dob,
+            image:employee.image
 
     });
 });
     }
     updateEmployee = (e) => {
         e.preventDefault();
-        let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId,department :this.state.department,salary:this.state.salary,gender:this.state.gender,dob:this.state.dob};
+        let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId,department :this.state.department,salary:this.state.salary,gender:this.state.gender,dob:this.state.dob,image:this.state.image};
         console.log('employee => ' + JSON.stringify(employee));
         if (this.state.firstName.length === 0) {
             alert("firstName field is Empty");
@@ -115,6 +117,64 @@ class EditEmployee extends Component {
     cancel(){
         this.props.history.push('/employees');
     }
+    handleImageChange = (e) => {
+
+        const file = e.target.files[0];
+
+        const reader = new FileReader();
+
+     
+
+        reader.onload = (event) => {
+
+          const base64String = event.target.result.split(",")[1];
+
+          this.setState({image:base64String});
+
+        };
+
+     
+
+        reader.onerror = (error) => {
+
+          console.log("Error: ", error);
+
+        };
+
+     
+
+        if (file) {
+
+          reader.readAsDataURL(file);
+
+        }
+
+      };
+
+       renderUserImage = () => {
+
+        if (this.state.image) {
+
+          return (
+
+            <img
+
+              src={`data:image/jpeg;base64,${this.state.image}`}
+
+              alt="User"
+
+              style={{height:150, width:150}}
+
+            />
+
+          );
+
+        }
+
+        return null;
+
+      };
+
     render(){
         return( <div>
             <br></br>
@@ -169,6 +229,13 @@ class EditEmployee extends Component {
                                         <input placeholder="dob" name="dob" className="form-control"  type='date'
                                             value={this.state.dob} onChange={this.changeDobHandler}/>
                                     </div>
+                                    <div className="form-group">
+                                          <label style={{fontFamily:'-moz-initial',color:'gold'}} >Image</label>
+                                          <input type="file"  accept="image/*"   onChange={this.handleImageChange}  className="form-control"  required />
+                                             {this.renderUserImage()}
+                                          <small className="form-text text-muted">Upload a profile picture for the user.</small>
+                                    </div>
+
                                     <div className = "form-group">
                                     
                                     <Link to='/employees'><button className="btn btn-success"  onClick={this.updateEmployee}>Save</button></Link>

@@ -29,21 +29,6 @@ class EmployeeList extends Component {
                 window.location.reload();
 
             });
-    
-        // axios.delete('http://localhost:8090/api/v1/employees/'+id)
-    
-        // .then(res => {
-    
-        //   window.location.reload();
-         
-    
-        // })
-    
-        // .catch(err => console.log(err));
-    
-    //     EmployeeService.deleteEmployee(id).then( res => {
-    //         this.setState({employees: this.state.employees.filter(employee => employee.id !== id)});
-    //     });
      }
     
 }
@@ -64,6 +49,66 @@ class EmployeeList extends Component {
 
         this.props.history.push('/add-employee');
     }
+
+    renderUserImage = (employee) => {
+
+        if (employee.image && typeof employee.image === 'string') {
+    
+          const blobData = atob(employee.image);
+    
+          const arrayBuffer = new ArrayBuffer(blobData.length);
+    
+          const uintArray = new Uint8Array(arrayBuffer);
+    
+          for (let i = 0; i < blobData.length; i++) {
+    
+            uintArray[i] = blobData.charCodeAt(i);
+    
+          }
+    
+          const blob = new Blob([arrayBuffer], { type: 'image/jpeg' });
+    
+     
+    
+          const base64String = URL.createObjectURL(blob);
+    
+          return (
+    
+            <img
+    
+              src={base64String}
+    
+              alt="User"
+    
+              style={{height:70, width:70}}
+    
+            />
+    
+          );
+    
+        } else if (employee.image && Array.isArray(employee.image)) {
+    
+          const base64String = btoa(String.fromCharCode.apply(null, employee.image));
+    
+          return (
+    
+            <img
+    
+              src={`data:image/jpeg;base64,${base64String}`}
+    
+              alt="User"
+    
+              style={{height:70, width:70}}
+    
+            />
+    
+          );
+    
+        }
+    
+        return null;
+    
+      };
 
     render() {
         return (
@@ -87,6 +132,7 @@ class EmployeeList extends Component {
 
                             <thead style={{}}>
                                 <tr>
+                                    <th style={{textAlign:"center",fontFamily:"FrankRuehl"}}>Image</th>
                                     <th style={{textAlign:"center",fontFamily:"FrankRuehl"}}> Firstname</th>
                                     <th style={{textAlign:"center",fontFamily:"FrankRuehl"}}> Lastname</th>
                                     <th style={{textAlign:"center",fontFamily:"FrankRuehl"}}> Email Id</th>
@@ -104,6 +150,7 @@ class EmployeeList extends Component {
                                     this.state.employees.map(
                                         employee => 
                                         <tr key = {employee.id}>
+                                            <td>{this.renderUserImage(employee)}</td>
                                              <td> { employee.firstName} </td>   
                                              <td> {employee.lastName}</td>
                                              <td> {employee.emailId}</td>
